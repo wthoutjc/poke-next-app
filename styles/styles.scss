@@ -1,0 +1,10 @@
+@import "./base/settings";
+@import "./base/base";
+
+// Pages
+@import "./pages/index";
+
+// Components
+@import "./components/ui/navbar";
+@import "./components/pokemon/pokemon";
+@import "./components/pokemon/pokemonFull";
