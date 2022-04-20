@@ -18,7 +18,7 @@ interface Props {
 const Home: NextPage<Props> = ({ pokemons }) => {
   return (
     <>
-      <Layout>
+      <Layout title="Poke App">
         <div className="home__container">
           <div className="home__left_container"></div>
           <div className="home__right_container">

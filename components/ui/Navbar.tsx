@@ -3,6 +3,8 @@ import Link from "next/link";
 
 // Icons
 import * as AiIcons from "react-icons/ai";
+import * as MdIcons from "react-icons/md";
+import ActiveLink from "./ActiveLink";
 
 const Navbar = () => {
   return (
@@ -15,7 +17,9 @@ const Navbar = () => {
           height={40}
         />
         <Link href={"/"}>
-          <a><h1>Pokemon</h1></a>
+          <a>
+            <h1>Pokemon</h1>
+          </a>
         </Link>
       </div>
       <div className="navbar__search">
@@ -28,11 +32,12 @@ const Navbar = () => {
       </div>
       <div className="navbar__options">
         <ul>
-          <li>Option 1</li>
-          <li>Option 2</li>
-          <li>Option 3</li>
-          <li>Option 4</li>
-          <li>Option 5</li>
+          <ActiveLink href={"/favorites"}>
+            <>
+              <p>Favorites</p>
+              <MdIcons.MdFavoriteBorder />
+            </>
+          </ActiveLink>
         </ul>
       </div>
     </nav>

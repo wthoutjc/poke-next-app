@@ -8,6 +8,7 @@ button {
   padding: 1em;
   background-color: #dfe6e9;
   justify-content: space-around;
+  animation: opacityEffect 0.3s linear;
 }
 .home__left_container,
 .home__right_container {
@@ -45,6 +46,9 @@ button {
     padding: 0.5em;
     border-radius: 0.4em;
     color: white;
+    position: sticky;
+    top: 15px;
+    z-index: 100;
     &::placeholder {
         color: rgba(255, 255, 255, 0.39);
     }

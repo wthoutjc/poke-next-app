@@ -1,5 +1,4 @@
 import { GetStaticProps, NextPage, GetStaticPaths } from "next";
-import { useRouter } from "next/router";
 import { Layout } from "../../components/layouts";
 
 // Interfaces
@@ -12,14 +11,12 @@ import { pokeApi } from "../../api";
 import { PokemonInfo } from "../../components/pokemon";
 
 interface Props {
-  pokemon: any;
+  pokemon: Pokemon;
 }
 
 const PokemonPage: NextPage<Props> = ({ pokemon }) => {
-  const { query } = useRouter();
-
   return (
-    <Layout title="Algún pokemon">
+    <Layout title={`Poke - ${pokemon.name}`}>
       <PokemonInfo {...pokemon} />
     </Layout>
   );

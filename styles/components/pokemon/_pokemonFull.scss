@@ -1,7 +1,55 @@
 .pokemonFull__container {
   animation: opacityEffect 0.3s linear;
   background-color: #264653;
-  height: 100%;
   color: white;
+  display: flex;
+  height: 100%;
   padding: 1em;
+  justify-content: space-around;
+}
+.pokemonFull__left-side {
+  width: 40%;
+  height: fit-content;
+  background-color: #34495e;
+  padding: 1em;
+  border-radius: 1em;
+  box-shadow: 0px 0px 5px 0px black;
+}
+
+.pokemonFull__left-side button {
+  background-color: inherit;
+  border: none;
+  color: white;
+  font-size: 140%;
+  &:hover {
+    color: rgb(230, 247, 0);
+    transition: all 0.3s;
+  }
+}
+
+.pokemonFull__left-side img {
+  filter: drop-shadow(1px 3px 3px white)
+}
+
+.pokemonFull__right-side {
+  width: 50%;
+  background-color: #34495e;
+  height: fit-content;
+  border-radius: 1em;
+  padding: 1em;
+  box-shadow: 0px 0px 3px 0px black;
+}
+
+.pokemonFull__right-side h1 {
+  text-transform: capitalize;
+  padding: 0.3em 0.1em;
+  border-bottom: 1px solid white;
+  border-radius: 0.2em;
+  margin-bottom: 0.5em;
+}
+.pokemonFull__image-slider {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.4em;
 }

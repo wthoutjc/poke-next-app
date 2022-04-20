@@ -15,14 +15,19 @@
   justify-content: space-evenly;
   height: 100%;
 }
-.navbar__container ul li {
+.navbar__container ul a {
   cursor: pointer;
   height: 100%;
   display: flex;
   align-items: center;
+  padding: 0.4em;
+  text-decoration: none;
   &:hover {
     color: rgb(152, 189, 243);
     transition: color 0.3s;
+  }
+  &:active {
+    box-shadow: inset 0px 0px 2px 0px rgb(152, 189, 243);
   }
 }
 .navbar__logo {
@@ -49,7 +54,16 @@
 .navbar__options {
   width: min(40%);
 }
-
+.navbar__options ul a {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  text-decoration: none;
+  color: aliceblue;
+}
+.navbar__options ul a p {
+  margin-right: 0.4em;
+}
 .navbar__search .navbar__search_container {
   width: 100%;
   display: flex;
