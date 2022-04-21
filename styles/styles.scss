@@ -3,9 +3,9 @@
 
 // Pages
 @import "./pages/index";
-@import "./pages/favorites";
 
 // Components
 @import "./components/ui/navbar";
 @import "./components/pokemon/pokemon";
 @import "./components/pokemon/pokemonFull";
+@import "./components/pokemon/pokemonFav";

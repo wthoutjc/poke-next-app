@@ -1,8 +1,10 @@
 import { Layout } from "../../components/layouts";
+import { PokemonFav } from "../../components/pokemon";
+
 const FavoritesPage = () => {
   return (
     <Layout title="Poke - My favorites">
-      <div className="favorites__container"></div>
+      <PokemonFav />
     </Layout>
   );
 };

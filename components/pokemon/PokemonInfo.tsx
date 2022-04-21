@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 // Interface
@@ -6,11 +7,16 @@ import { Pokemon as PokemonInfo } from "../../interfaces";
 // Icons
 import * as AiIcons from "react-icons/ai";
 
-const PokemonInfo = (pokemon: PokemonInfo) => {
-  const { name, sprites } = pokemon;
+// Utils
+import { toggleFavorite, existsInFavorites } from "../../utils";
 
-  console.log(sprites);
-  
+// Effects
+import confettti from "canvas-confetti";
+
+const PokemonInfo = (pokemon: PokemonInfo) => {
+  const [isInFavorites, setIsInFavorites] = useState(false);
+
+  const { name, sprites } = pokemon;
 
   const arraySprites = [
     pokemon.sprites.back_default,
@@ -19,10 +25,34 @@ const PokemonInfo = (pokemon: PokemonInfo) => {
     pokemon.sprites.front_shiny,
   ];
 
+  useEffect(() => {
+    setIsInFavorites(existsInFavorites(pokemon.id));
+  }, [pokemon.id]);
+
+  const onToggleFavorite = () => {
+    toggleFavorite(pokemon.id);
+    setIsInFavorites(!isInFavorites);
+    if (!isInFavorites) {
+      confettti({
+        zIndex: 999,
+        particleCount: 100,
+        spread: 160,
+        angle: -20,
+        origin: {
+          x: 0,
+          y: -0.2,
+        },
+      });
+    }
+  };
+
   return (
     <div className={"pokemonFull__container"}>
       <div className={"pokemonFull__left-side"}>
-        <button>
+        <button
+          onClick={onToggleFavorite}
+          style={isInFavorites ? { color: "yellow" } : { color: "white" }}
+        >
           <AiIcons.AiFillStar />
         </button>
         <Image
@@ -43,8 +73,8 @@ const PokemonInfo = (pokemon: PokemonInfo) => {
               key={i}
               src={sprite || "/no-image.png"}
               alt={name}
-              width={90}
-              height={100}
+              width={100}
+              height={120}
             />
           ))}
         </div>

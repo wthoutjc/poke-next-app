@@ -1,14 +1,14 @@
 import { GetStaticProps, NextPage, GetStaticPaths } from "next";
-import { Layout } from "../../components/layouts";
-
-// Interfaces
-import { Pokemon } from "../../interfaces";
-
-// API
-import { pokeApi } from "../../api";
 
 // Components
+import { Layout } from "../../components/layouts";
 import { PokemonInfo } from "../../components/pokemon";
+
+// Interfaces
+import { Pokemon, PokemonListResponse } from "../../interfaces";
+
+// Api
+import { pokeApi } from "../../api";
 
 // Utils
 import { getPokemonInfo } from "../../utils/getPokemonInfo";
@@ -17,41 +17,35 @@ interface Props {
   pokemon: Pokemon;
 }
 
-const PokemonPage: NextPage<Props> = ({ pokemon }) => {
+const NamePage: NextPage<Props> = ({ pokemon }) => {
   return (
-    <Layout title={`Poke - ${pokemon.name}`}>
+    <Layout>
       <PokemonInfo {...pokemon} />
     </Layout>
   );
 };
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
-  const pokemons = [...Array(151)].map((value, index) => `${index + 1}`);
+  const { data } = await pokeApi.get<PokemonListResponse>("/pokemon?limit=151");
+
+  const namesPokemons: string[] = data.results.map((pokemon) => pokemon.name);
 
   return {
-    paths: pokemons.map((id) => ({
-      params: { id },
+    paths: namesPokemons.map((name) => ({
+      params: { name },
     })),
     fallback: false,
   };
-
-  // paths: [
-  //   {
-  //     params: {
-  //       id: pokemons,
-  //     },
-  //   },
-  // ],
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { id } = params as { id: string };
+  const { name } = params as { name: string };
 
   return {
     props: {
-      pokemon: await getPokemonInfo(id),
+      pokemon: await getPokemonInfo(name),
     },
   };
 };
 
-export default PokemonPage;
+export default NamePage;
