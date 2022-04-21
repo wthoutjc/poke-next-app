@@ -1,4 +1,4 @@
-See the result [`here`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+See the result [`here`](https://poke-read-app.vercel.app/).
 
 # Read Poke App
 
