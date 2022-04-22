@@ -34,17 +34,30 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
     paths: namesPokemons.map((name) => ({
       params: { name },
     })),
-    fallback: false,
+    // fallback: false, -> $04 para todo lo que no este en el PATH, QUITA EL ISG (Incremental Static Re-Generation)
+    fallback: "blocking",
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { name } = params as { name: string };
 
+  const pokemon = await getPokemonInfo(name);
+
+  if (!pokemon) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
-      pokemon: await getPokemonInfo(name),
+      pokemon,
     },
+    revalidate: 86399,
   };
 };
 

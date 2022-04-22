@@ -1,5 +1,5 @@
 import type { NextPage, GetStaticProps } from "next";
-import Image from "next/image";
+import { ChangeEvent, ChangeEventHandler, useState } from "react";
 import { pokeApi } from "../api";
 
 // Layout
@@ -16,16 +16,27 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ pokemons }) => {
+  const [pokemonsCard, setPokemonsCards] = useState(pokemons);
+
+  const handleSearch: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setPokemonsCards(
+      pokemonsCard.filter((pokemon) => pokemon.name.includes(e.target.value))
+    );
+  };
+
   return (
     <>
       <Layout title="Poke App">
         <div className="home__container">
-          <div className="home__left_container"></div>
-          <div className="home__right_container">
+          <div className="home__pokemon-data">
             <h2>Pokemons first generation</h2>
-            <input type="text" placeholder="Search" />
+            <input
+              type="text"
+              placeholder="Search by name..."
+              onChange={handleSearch}
+            />
             <ul>
-              {pokemons?.map((pokemon, i) => (
+              {pokemonsCard?.map((pokemon, i) => (
                 <PokemonCard key={i + 1} {...pokemon} />
               ))}
             </ul>
